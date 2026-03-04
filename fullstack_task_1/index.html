@@ -1,0 +1,24 @@
+<form action="process.php" method="POST" class="reg-form">
+    <h2>Student Registration</h2>
+    
+    <label>Full Name</label>
+    <input type="text" name="student_name" required>
+
+    <label>Email Address</label>
+    <input type="email" name="email" required>
+
+    <label>Date of Birth</label>
+    <input type="date" name="dob" required>
+
+    <label>Department</label>
+    <select name="dept">
+        <option value="CS">Computer Science</option>
+        <option value="EE">Electrical Engineering</option>
+        <option value="ME">Mechanical Engineering</option>
+    </select>
+
+    <label>Phone Number</label>
+    <input type="tel" name="phone" pattern="[0-9]{10}" placeholder="10-digit number" required>
+
+    <button type="submit" name="submit">Register Student</button>
+</form>
