@@ -1,0 +1,16 @@
+<section style="margin-bottom: 20px; background: #eee; padding: 15px;">
+    <form method="GET" style="display:inline;">
+        <label>Filter by Dept:</label>
+        <select name="dept" onchange="this.form.submit()">
+            <option value="">All Departments</option>
+            <option value="CS" <?php if($filter=='CS') echo 'selected'; ?>>CS</option>
+            <option value="EE" <?php if($filter=='EE') echo 'selected'; ?>>EE</option>
+        </select>
+    </form>
+
+    <span style="margin-left: 20px;">
+        Sort by: 
+        <a href="?sort=fullname&dept=<?php echo $filter; ?>">Name</a> | 
+        <a href="?sort=dob&dept=<?php echo $filter; ?>">Date of Birth</a>
+    </span>
+</section>
