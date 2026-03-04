@@ -1,16 +1,41 @@
-<section style="margin-bottom: 20px; background: #eee; padding: 15px;">
-    <form method="GET" style="display:inline;">
-        <label>Filter by Dept:</label>
-        <select name="dept" onchange="this.form.submit()">
-            <option value="">All Departments</option>
-            <option value="CS" <?php if($filter=='CS') echo 'selected'; ?>>CS</option>
-            <option value="EE" <?php if($filter=='EE') echo 'selected'; ?>>EE</option>
-        </select>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Record Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <span style="margin-left: 20px;">
-        Sort by: 
-        <a href="?sort=fullname&dept=<?php echo $filter; ?>">Name</a> | 
-        <a href="?sort=dob&dept=<?php echo $filter; ?>">Date of Birth</a>
-    </span>
-</section>
+    <div class="container">
+        <h1>Employee Records</h1>
+
+        <div id="stats-container" class="stats-grid">
+            </div>
+
+        <div class="controls">
+            <select id="deptFilter">
+                <option value="All">All Departments</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Design">Design</option>
+            </select>
+
+            <button onclick="sortData('name')">Sort by Name</button>
+            <button onclick="sortData('date')">Sort by Date</button>
+        </div>
+
+        <table id="recordTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Join Date</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
