@@ -5,7 +5,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
     const messageBox = document.getElementById('formMessage');
 
-    // Simple Regex for Email Validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     if (!emailPattern.test(email)) {
@@ -25,7 +24,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         if (response.ok) {
             messageBox.style.color = "green";
             messageBox.innerText = "Login Successful! Redirecting...";
-            // window.location.href = "/dashboard"; 
+
         } else {
             messageBox.style.color = "red";
             messageBox.innerText = result.error;
