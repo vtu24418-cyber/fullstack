@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory Control System</title>
+<style>
+body { font-family: Arial; background:#f5e3a1; margin:0; }
+.container { width:90%; margin:auto; }
+.card { background:#fff3c4; padding:20px; border-radius:10px; margin-top:20px; }
+input { width:100%; padding:10px; margin:10px 0; }
+button { padding:10px; border:none; border-radius:5px; cursor:pointer; }
+.login-btn { background:#1e73be; color:white; width:100%; }
+.green { background:green; color:white; }
+.blue { background:#1e73be; color:white; }
+table { width:100%; border-collapse: collapse; margin-top:20px; }
+th, td { padding:10px; border:1px solid #ddd; text-align:left; }
+.low { color:red; font-weight:bold; }
+.ok { color:green; font-weight:bold; }
+.hidden { display:none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="login" class="card">
+<h2>Staff Login</h2>
+<input id="username" placeholder="eg. Admin">
+<input id="password" type="password" placeholder="Password">
+<button class="login-btn" onclick="login()">SUBMIT</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
+<div class="card">
+<button class="green" onclick="showStock()">LOG IN (Staff)</button>
+<button class="blue" onclick="showStock()">VIEW LIVE STOCK</button>
+</div>
+
+<div class="card">
+<h2>Live Inventory</h2>
+<table id="stockTable">
+<thead>
+<tr>
+<th>Category</th>
+<th>Item ID</th>
+<th>Item Name</th>
+<th>Supplier</th>
+<th>Stock</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<script>
+const data = [
+{cat:"Electronics", id:"E002", name:"Microchips", sup:"S101", stock:8},
+{cat:"Perishables", id:"F001", name:"Whole Bananas", sup:"S102", stock:5},
+{cat:"Perishables", id:"F005", name:"Small Bananas", sup:"S102", stock:22},
+{cat:"Packaging", id:"P102", name:"Boxes (Small)", sup:"S201", stock:45},
+{cat:"Packaging", id:"P105", name:"Crate Liners", sup:"S203", stock:120}
+];
+
+function login(){
+let u = document.getElementById('username').value;
+let p = document.getElementById('password').value;
+if(u === 'admin' && p === 'admin'){
+ document.getElementById('login').classList.add('hidden');
+ document.getElementById('dashboard').classList.remove('hidden');
+ showStock();
+}else{
+ alert('Invalid credentials');
+}
+}
+
+function showStock(){
+let tbody = document.querySelector('#stockTable tbody');
+tbody.innerHTML = '';
+
+data.forEach(item => {
+ let status = item.stock < 10 ? '<span class="low">LOW</span>' : '<span class="ok">Healthy</span>';
+ let row = `<tr>
+<td>${item.cat}</td>
+<td>${item.id}</td>
+<td>${item.name}</td>
+<td>${item.sup}</td>
+<td>${item.stock} (${status})</td>
+</tr>`;
+ tbody.innerHTML += row;
+});
+}
+
+// LIVE UPDATE SIMULATION
+setInterval(()=>{
+data.forEach(i=>{
+ let change = Math.floor(Math.random()*5);
+ i.stock = Math.max(0, i.stock - change);
+});
+showStock();
+},5000);
+</script>
+
+</body>
+</html>
